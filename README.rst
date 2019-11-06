@@ -71,7 +71,7 @@ then use ``{% compress parcel %} <script> {% endcompress %}`` to load a script. 
       
 Vue example
 -----------
-Create a vue project in your django project root
+Create a vue project in your django project root.
 See the demo project django_vue_
 ::
 
