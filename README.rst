@@ -1,4 +1,4 @@
-Django Compressor with Parceljs
+Django Compressor Parceljs
 =====================================
 Django-compressor_ with parceljs_ is base on Django-Compressor, which bundles and minifies your typescript, vue, react, scss etc in a Django template into cacheable static files using parceljs and django-compressor.
 
