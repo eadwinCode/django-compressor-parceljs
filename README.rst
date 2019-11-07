@@ -37,7 +37,7 @@ Other Configurations
 
 To minify your code for production, you need to set COMPRESS_ENABLED and COMPRESS_OFFLINE to true in settings.py.
 
-In django-compressor, the value of COMPRESS_ENABLED = !DEBUG is not set in the settings.
+In django-compressor, the value of COMPRESS_ENABLED = !DEBUG, if not set in the settings.
 
 .. code-block:: python
 
