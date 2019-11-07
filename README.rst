@@ -13,7 +13,7 @@ Install django-compress::
  
 Install parcel-bundler::
 
-    npm install -g parcel-bundler
+    npm install -g parcel
 
 Add it to your `INSTALLED_APPS`:
 
