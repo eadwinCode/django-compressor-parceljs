@@ -118,7 +118,7 @@ setup(
     url='https://django-compressor-parceljs.readthedocs.io/en/latest/',
     license='MIT',
     description="Compresses JS, JS frameworks, CSS, SASS, LESS, SCSS into cached files.",
-    long_description=read('_pypi_description'),
+    long_description=read('_pypi_description.md'),
     author='Eadwin Code',
     author_email='ezeudoh.tochukwu@gmail.com',
     packages=find_packages(),
