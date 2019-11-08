@@ -7,6 +7,7 @@ from compressor.cache import (cache_get, cache_set, get_offline_hexdigest,
 from compressor.conf import settings
 from compressor.exceptions import OfflineGenerationError
 from compressor.utils import get_class
+from compressor.templatetags.private_static import is_private_static_path
 
 register = template.Library()
 
