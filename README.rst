@@ -44,6 +44,12 @@ From django-compressor settings, the value of COMPRESS_ENABLED = !DEBUG, in sett
     COMPRESS_ENABLED = True
     COMPRESS_OFFLINE = True
 
+Then run,
+
+.. code-block:: python
+
+    python manage.py compress -setting path-to-your-production-settings
+
 For more information on django-compressor-settings_
 
 Usage
