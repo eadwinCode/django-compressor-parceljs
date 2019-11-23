@@ -96,6 +96,10 @@ class ParserFilter(CompilerFilter):
 class ParserFilterJS(ParserFilter):
 
     def input(self, **kwargs):
+
+        if not settings.COMPRESS_ENABLED or kwargs.get('forced', None):
+            return ('js', self.content), ('css', None)
+
         _kind = kwargs.get('kind')
         if _kind == 'file':
             if (settings.COMPRESS_OFFLINE):
@@ -226,5 +230,8 @@ class ParserFilterCSS(ParserFilter):
     def input(self, **kwargs):
         if not kwargs.get('method', None):
             return self.content
-        
+
+        if not settings.COMPRESS_ENABLED or kwargs.get('forced', None):
+            return self.content
+
         return super().input(**kwargs)

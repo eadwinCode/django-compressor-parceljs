@@ -24,7 +24,7 @@ class CompressorConf(AppConf):
     PARSER = 'compressor.parser.AutoSelectParser'
     OUTPUT_DIR = 'CACHE'
     STORAGE = 'compressor.storage.CompressorFileStorage'
-    PRIVATE_DIRS = ()
+    PRIVATE_DIRS = None
 
     COMPRESSORS = dict(
         css='compressor.css.CssCompressor',
@@ -116,6 +116,10 @@ class CompressorConf(AppConf):
         return os.path.normcase(os.path.abspath(value))
 
     def configure_private_dirs(self, value):
+        # if not configured return empty list
+        if value is None:
+            return []
+
         if not isinstance(value, (list, tuple)):
             raise ImproperlyConfigured("The COMPRESS_PRIVATE_DIRS setting "
                                        "must be a list or tuple. Check for "

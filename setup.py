@@ -119,7 +119,7 @@ setup(
     license='MIT',
     description="Compresses JS, JS frameworks, CSS, SASS, LESS, SCSS into cached files.",
     long_description=read('_pypi_description.md'),
-    author='Eadwin Code',
+    author='Ezeudoh Tochukwu',
     author_email='ezeudoh.tochukwu@gmail.com',
     packages=find_packages(),
     package_data=find_package_data(),
