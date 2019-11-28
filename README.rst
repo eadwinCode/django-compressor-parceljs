@@ -306,4 +306,4 @@ Add lang attribute to the script tag ``<script lang="ts"></script>`` ::
 .. _precompilers: https://django-compressor.readthedocs.io/en/latest/settings/#django.conf.settings.COMPRESS_PRECOMPILERS
 .. _issue: https://github.com/parcel-bundler/parcel/issues/1186/
 .. _django_vue: https://github.com/eadwinCode/django_vue
-.. _react: https//github.com/eadwinCode/django_react
+.. _react: https://github.com/eadwinCode/django_react
