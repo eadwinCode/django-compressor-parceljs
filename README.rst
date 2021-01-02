@@ -125,7 +125,7 @@ See the demo project django_vue_ or with react_
 ::
 
     npm init --yes
-    npm install -D vue-template-compiler, @vue/component-compiler-utils
+    npm install --save-dev vue-template-compiler @vue/component-compiler-utils
     npm install vue
     
 In your django project app create ::
