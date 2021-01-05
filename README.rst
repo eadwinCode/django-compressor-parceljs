@@ -51,6 +51,12 @@ Then run,
 
     python manage.py compress --setting path-to-your-production-settings
 
+Then run,
+
+.. code-block:: python
+
+    python manage.py compress -setting path-to-your-production-settings
+
 For more information on django-compressor-settings_
 
 Usage
@@ -122,7 +128,7 @@ Private directory setup ::
 Vue example
 -----------
 Create a vue project in your django project root.
-See the demo project django_vue_
+See the demo project django_vue_ or with react_
 ::
 
     npm init --yes
@@ -307,4 +313,4 @@ Add lang attribute to the script tag ``<script lang="ts"></script>`` ::
 .. _precompilers: https://django-compressor.readthedocs.io/en/latest/settings/#django.conf.settings.COMPRESS_PRECOMPILERS
 .. _issue: https://github.com/parcel-bundler/parcel/issues/1186/
 .. _django_vue: https://github.com/eadwinCode/django_vue
-
+.. _react: https://github.com/eadwinCode/django_react
