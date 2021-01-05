@@ -4,7 +4,6 @@ from compressor.base import (render_to_string, os,
                              CompressorError, mark_safe, post_compress, ContentFile, get_hexdigest
                              )
 
-
 class ParcelJsCompressor(JsCompressor):
     output_mimetypes = {'text/javascript', 'text/css'}
 
@@ -84,12 +83,12 @@ class ParcelJsCompressor(JsCompressor):
         the appropriate template with the file's URL.
         """
         content_url = {}
-
         for key, value in content:
             if value:
                 new_filepath = self.handle_parcel_filepath(value, key, basename=basename)
                 if not self.storage.exists(new_filepath) or forced:
-                    self.storage.save(new_filepath, ContentFile(value.encode(self.charset)))
+                    file_content = value.encode(self.charset)
+                    self.storage.save(new_filepath, ContentFile(file_content))
                 content_url.update({key: mark_safe(self.storage.url(new_filepath))})
         return self.render_output(mode, content_url)
 

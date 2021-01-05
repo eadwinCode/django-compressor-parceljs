@@ -43,6 +43,13 @@ From django-compressor settings, the value of COMPRESS_ENABLED = !DEBUG, in sett
 
     COMPRESS_ENABLED = True
     COMPRESS_OFFLINE = True
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+Then run,
+
+.. code-block:: python
+
+    python manage.py compress --setting path-to-your-production-settings
 
 Then run,
 
@@ -125,7 +132,7 @@ See the demo project django_vue_ or with react_
 ::
 
     npm init --yes
-    npm install -D vue-template-compiler, @vue/component-compiler-utils
+    npm install -D vue-template-compiler @vue/component-compiler-utils
     npm install vue
     
 In your django project app create ::
