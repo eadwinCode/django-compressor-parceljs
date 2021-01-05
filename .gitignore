@@ -16,3 +16,5 @@ docs/_build/
 .coverage
 .tox
 .eggs
+.venv
+.vscode

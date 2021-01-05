@@ -1,9 +1,8 @@
 from compressor.conf import settings
 from compressor.js import JsCompressor
 from compressor.base import (render_to_string, os,
-    CompressorError, mark_safe, post_compress, ContentFile, get_hexdigest
-)
-
+                             CompressorError, mark_safe, post_compress, ContentFile, get_hexdigest
+                             )
 
 class ParcelJsCompressor(JsCompressor):
     output_mimetypes = {'text/javascript', 'text/css'}
@@ -46,7 +45,7 @@ class ParcelJsCompressor(JsCompressor):
         for hunk in self.hunks(forced=True):
             for key, value in hunk:
                 content[key] = f"{content[key]}; {value}" if content[key] else value
-        return list(content.items()) 
+        return list(content.items())
 
     def output(self, *args, **kwargs):
         if (settings.COMPRESS_ENABLED or settings.COMPRESS_PRECOMPILERS or
@@ -84,13 +83,13 @@ class ParcelJsCompressor(JsCompressor):
         the appropriate template with the file's URL.
         """
         content_url = {}
-
         for key, value in content:
             if value:
                 new_filepath = self.handle_parcel_filepath(value, key, basename=basename)
                 if not self.storage.exists(new_filepath) or forced:
-                    self.storage.save(new_filepath, ContentFile(value.encode(self.charset)))
-                content_url.update({ key: mark_safe(self.storage.url(new_filepath)) })
+                    file_content = value.encode(self.charset)
+                    self.storage.save(new_filepath, ContentFile(file_content))
+                content_url.update({key: mark_safe(self.storage.url(new_filepath))})
         return self.render_output(mode, content_url)
 
     def output_inline(self, mode, content, forced=False, basename=None):
@@ -130,4 +129,3 @@ class ParcelJsCompressor(JsCompressor):
                            mode=mode, context=final_context)
         template_name = self.get_template_name(mode)
         return render_to_string(template_name, context=final_context)
-

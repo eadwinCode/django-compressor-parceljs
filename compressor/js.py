@@ -1,6 +1,6 @@
 from compressor.conf import settings
 from compressor.base import Compressor, SOURCE_HUNK, SOURCE_FILE
-from compressor.utils import path_exist, get_basename_from_private_static
+from compressor.templatetags.private_static import is_private_static_path, get_basename_from_private_static
 
 class JsCompressor(Compressor):
 
@@ -14,7 +14,7 @@ class JsCompressor(Compressor):
             attribs = self.parser.elem_attribs(elem)
             if 'src' in attribs:
                 src = attribs['src']
-                if not path_exist(src):
+                if not is_private_static_path(src):
                     basename = self.get_basename(attribs['src'])
                     filename = self.get_filename(basename)
                 else:

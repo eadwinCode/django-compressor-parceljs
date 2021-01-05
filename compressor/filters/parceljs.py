@@ -5,6 +5,7 @@ from compressor.filters.base import (
     NamedTemporaryFile, subprocess, shell_quote, FilterError, smart_text, io
 )
 
+parcel_absolute_url_skip = '///..'
 parcel_offline_args = '--no-source-maps --no-autoinstall --no-content-hash'
 parcel_args = '--no-minify --no-source-maps --no-autoinstall --no-content-hash'
 
@@ -96,6 +97,10 @@ class ParserFilter(CompilerFilter):
 class ParserFilterJS(ParserFilter):
 
     def input(self, **kwargs):
+
+        if not settings.COMPRESS_ENABLED or kwargs.get('forced', None):
+            return ('js', self.content), ('css', None)
+
         _kind = kwargs.get('kind')
         if _kind == 'file':
             if (settings.COMPRESS_OFFLINE):
@@ -169,7 +174,7 @@ class ParserFilterJS(ParserFilter):
     
     def get_refined_output(self, output, **kwargs):
         filtered, css_filtered = output
-        return ('js', smart_text(filtered)), ('css', smart_text(css_filtered.replace('///..', ''))) if css_filtered else ('css', css_filtered)
+        return ('js', smart_text(filtered.replace(parcel_absolute_url_skip, ''))), ('css', smart_text(css_filtered.replace(parcel_absolute_url_skip, ''))) if css_filtered else ('css', css_filtered)
 
 
 # django-compress has best implementation
@@ -220,11 +225,14 @@ class ParserFilterCSS(ParserFilter):
             options["outfile"] = self.outfile.name
     
     def get_refined_output(self, output, **kwargs):
-        filtered = output.replace('///..', '')
+        filtered = output.replace(parcel_absolute_url_skip, '')
         return smart_text(filtered)
 
     def input(self, **kwargs):
         if not kwargs.get('method', None):
             return self.content
-        
+
+        if not settings.COMPRESS_ENABLED or kwargs.get('forced', None):
+            return self.content
+
         return super().input(**kwargs)
