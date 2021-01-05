@@ -1,19 +1,19 @@
-Django Compressor with Parceljs
+Django Compressor Parceljs
 =====================================
-Django-compressor_ with parceljs_ is base on Django-Compressor, which bundles and minifies your typescript, vue, react, scss etc in a Django template into cacheable static files using parceljs and django-compressor.
+django-compressor-parceljs is base on Django-Compressor_. It provides additional support to bundles and minifies your typescript, vue, react, scss etc, in a Django template into cacheable static files using parceljs_.
 
-For more information visit Django-Compressor_
+For more information on how django-compressor-parceljs really works visit Django-Compressor_
 
 
 Quickstart
 ----------
 Install django-compress::
 
-    pip install git+https://github.com/eadwinCode/django-compressor.git@develop
+    pip install django-compressor-parceljs
  
 Install parcel-bundler::
 
-    npm install -g parcel-bundler
+    npm install -g parcel
 
 Add it to your `INSTALLED_APPS`:
 
@@ -37,12 +37,19 @@ Other Configurations
 
 To minify your code for production, you need to set COMPRESS_ENABLED and COMPRESS_OFFLINE to true in settings.py.
 
-In django-compressor, the value of COMPRESS_ENABLED = !DEBUG is not set in the settings.
+From django-compressor settings, the value of COMPRESS_ENABLED = !DEBUG, in settings.py.
 
 .. code-block:: python
 
     COMPRESS_ENABLED = True
     COMPRESS_OFFLINE = True
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+Then run,
+
+.. code-block:: python
+
+    python manage.py compress --setting path-to-your-production-settings
 
 For more information on django-compressor-settings_
 
@@ -68,13 +75,58 @@ then use ``{% compress parcel %} <script> {% endcompress %}`` to load a script. 
        {% endcompress %}
       </body>
       ...
-      
+
+
+Private directories
+-------------------
+You can use other directories in your project which are not marked as static files with django-compressor-parceljs. 
+
+This feature was added to avoid exposing your real code structure, like your front-end components source, to the real world via static urls.
+
+Django-compressor-parceljs provides another tag ``{% private_static %}`` which works like the normal django static tag ``{% static %}`` to enable you work with a seperate directory registered in ``COMPRESS_PRIVATE_DIRS`` in settings.py. And they won't be accessed via any url.
+
+Private directory setup ::
+
+    settings.py
+
+.. code-block:: python
+
+    COMPRESS_PRIVATE_DIRS = [
+      os.path.join(BASE_DIR, 'my_dir'),
+      ....
+    ]
+
+::
+
+    some_file.html
+
+.. code-block:: html
+
+    {% load static %} 
+    {% load compress %}
+    {% load private_static %}
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <title>Vue Django Testing</title>
+      </head>
+      <body>
+        ....
+       {% compress parcel file myts %}
+        <script src="{% private_static 'js/index.js' %}"></script>
+       {% endcompress %}
+      </body>
+      ...
+
 Vue example
 -----------
-Create a vue project in your django project root ::
+Create a vue project in your django project root.
+See the demo project django_vue_
+::
 
     npm init --yes
-    npm install -D vue-template-compiler, @vue/component-compiler-utils
+    npm install -D vue-template-compiler @vue/component-compiler-utils
     npm install vue
     
 In your django project app create ::
@@ -190,7 +242,7 @@ Add the ``type="text/x-scss"`` for django-compressor to use the precompiler opti
 
 There is alittle drawback with parceljs css url resolver. There is no configuration for parceljs to ignore resolving css url since django will always resolve static urls automatically. Read more this issue_
 
-A solution is to use ``///..`` in the url path followed by ``/static/(filepath)``
+A solution is to use ``///..`` on the url path followed by ``/static/(path_to_file)``
 
 .. code-block:: scss
 
@@ -254,3 +306,5 @@ Add lang attribute to the script tag ``<script lang="ts"></script>`` ::
 .. _django-compressor-settings: https://django-compressor.readthedocs.io/en/latest/settings/
 .. _precompilers: https://django-compressor.readthedocs.io/en/latest/settings/#django.conf.settings.COMPRESS_PRECOMPILERS
 .. _issue: https://github.com/parcel-bundler/parcel/issues/1186/
+.. _django_vue: https://github.com/eadwinCode/django_vue
+

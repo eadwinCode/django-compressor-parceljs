@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 # flake8: noqa
 import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_vue.prod_settings')
 import sys
 
 from collections import OrderedDict, defaultdict
@@ -8,6 +9,7 @@ from fnmatch import fnmatch
 from importlib import import_module
 
 import django
+django.setup()
 import six
 from django.core.management.base import BaseCommand, CommandError
 import django.template
@@ -305,3 +307,8 @@ class Command(BaseCommand):
         return final_block_count, final_results
 
 Command.requires_system_checks = False
+
+if __name__ == '__main__':
+
+    cmd = Command()
+    cmd.handle()
