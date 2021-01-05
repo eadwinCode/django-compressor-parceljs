@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 # flake8: noqa
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_vue.prod_settings')
 import sys
 
 from collections import OrderedDict, defaultdict
@@ -9,7 +8,6 @@ from fnmatch import fnmatch
 from importlib import import_module
 
 import django
-django.setup()
 import six
 from django.core.management.base import BaseCommand, CommandError
 import django.template
@@ -111,7 +109,7 @@ class Command(BaseCommand):
                 try:
                     module = import_module(loader.__module__)
                     get_template_sources = getattr(module,
-                        'get_template_sources', None)
+                                                   'get_template_sources', None)
                     if get_template_sources is None:
                         get_template_sources = loader.get_template_sources
                     paths.update(smart_text(origin) for origin in get_template_sources(''))
@@ -132,14 +130,14 @@ class Command(BaseCommand):
             for path in paths:
                 for root, dirs, files in os.walk(path, followlinks=follow_links):
                     templates.update(os.path.join(root, name)
-                        for name in files if not name.startswith('.') and
-                            any(fnmatch(name, "*%s" % glob) for glob in extensions))
+                                     for name in files if not name.startswith('.') and
+                                     any(fnmatch(name, "*%s" % glob) for glob in extensions))
         elif engine == 'jinja2':
             env = settings.COMPRESS_JINJA2_GET_ENVIRONMENT()
             if env and hasattr(env, 'list_templates'):
                 templates |= set([env.loader.get_source(env, template)[1] for template in
-                            env.list_templates(filter_func=lambda _path:
-                            os.path.splitext(_path)[-1] in extensions)])
+                                  env.list_templates(filter_func=lambda _path:
+                                  os.path.splitext(_path)[-1] in extensions)])
 
         if not templates:
             raise OfflineGenerationError("No templates found. Make sure your "
@@ -306,9 +304,5 @@ class Command(BaseCommand):
         write_offline_manifest(final_offline_manifest)
         return final_block_count, final_results
 
+
 Command.requires_system_checks = False
-
-if __name__ == '__main__':
-
-    cmd = Command()
-    cmd.handle()
