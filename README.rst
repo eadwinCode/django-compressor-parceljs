@@ -51,12 +51,6 @@ Then run,
 
     python manage.py compress --setting path-to-your-production-settings
 
-Then run,
-
-.. code-block:: python
-
-    python manage.py compress --settings path-to-your-production-settings
-
 For more information on django-compressor-settings_
 
 Usage
