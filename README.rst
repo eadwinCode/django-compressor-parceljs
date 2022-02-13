@@ -1,3 +1,6 @@
+.. image:: https://static.pepy.tech/personalized-badge/django-compressor-parceljs?period=month&units=international_system&left_color=black&right_color=yellow&left_text=Downloads
+ :target: https://pepy.tech/project/django-compressor-parceljs
+
 Django Compressor Parceljs
 =====================================
 django-compressor-parceljs is base on Django-Compressor_. It provides additional support to bundles and minifies your typescript, vue, react, scss etc, in a Django template into cacheable static files using parceljs_.
