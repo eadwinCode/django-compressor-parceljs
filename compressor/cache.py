@@ -8,8 +8,14 @@ from importlib import import_module
 import six
 from django.core.cache import caches
 from django.core.files.base import ContentFile
-from django.utils.encoding import force_text, smart_bytes
+from django.utils.encoding import smart_bytes
 from django.utils.functional import SimpleLazyObject
+
+try:
+    from django.utils.encoding import force_text
+except ImportError:
+    from django.utils.encoding import force_str
+    force_text = force_str
 
 from compressor.conf import settings
 from compressor.storage import default_storage
