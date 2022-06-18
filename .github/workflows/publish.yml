@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: 3.7
       - name: "Install dependencies"
-        run: "scripts/install"
+        run: "scripts/publish-install"
       - name: "Build package & docs"
         run: "scripts/build"
       - name: "Publish to PyPI & deploy docs"
