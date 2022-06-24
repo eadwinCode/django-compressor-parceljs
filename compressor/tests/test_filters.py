@@ -6,7 +6,13 @@ import sys
 import mock
 
 import six
-from django.utils.encoding import smart_text
+
+try:
+    from django.utils.encoding import smart_text
+except ImportError:
+    from django.utils.encoding import smart_str
+    smart_text = smart_str
+
 from django.test import TestCase
 from django.test.utils import override_settings
 
