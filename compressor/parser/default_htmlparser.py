@@ -1,7 +1,7 @@
 import sys
 
 import six
-from django.utils.encoding import smart_text
+from compressor.compatible import smart_text
 
 from compressor.exceptions import ParserError
 from compressor.parser import ParserBase
