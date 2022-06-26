@@ -22,13 +22,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.files.temp import NamedTemporaryFile
 
 import six
-
-try:
-    from django.utils.encoding import smart_text
-except ImportError:
-    from django.utils.encoding import smart_str
-    smart_text = smart_str
-
+from compressor.compatible import smart_text
 from compressor.cache import cache, get_precompiler_cachekey
 
 from compressor.conf import settings

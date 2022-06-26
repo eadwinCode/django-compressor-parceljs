@@ -12,13 +12,7 @@ import six
 from django.core.management.base import BaseCommand, CommandError
 import django.template
 from django.template import Context
-
-try:
-    from django.utils.encoding import smart_text
-except ImportError:
-    from django.utils.encoding import smart_str
-    smart_text = smart_str
-
+from compressor.compatible import smart_text
 from django.template.loader import get_template  # noqa Leave this in to preload template locations
 from django.template import engines
 

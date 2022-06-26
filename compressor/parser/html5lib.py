@@ -1,12 +1,6 @@
 from __future__ import absolute_import
 from django.core.exceptions import ImproperlyConfigured
-
-try:
-    from django.utils.encoding import smart_text
-except ImportError:
-    from django.utils.encoding import smart_str
-    smart_text = smart_str
-
+from compressor.compatible import smart_text
 from django.utils.functional import cached_property
 
 from compressor.exceptions import ParserError
