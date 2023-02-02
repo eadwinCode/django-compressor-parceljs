@@ -1,4 +1,4 @@
-.. image:: https://static.pepy.tech/personalized-badge/django-compressor-parceljs?period=month&units=international_system&left_color=black&right_color=yellow&left_text=Downloads
+.. image:: https://static.pepy.tech/personalized-badge/django-compressor-parceljs?period=total&units=international_system&left_color=black&right_color=green&left_text=Downloads
  :target: https://pepy.tech/project/django-compressor-parceljs
 
 Django Compressor Parceljs
